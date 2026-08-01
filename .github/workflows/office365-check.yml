@@ -30,4 +30,9 @@ jobs:
           OFFICE365_PASSWORD: ${{ secrets.OFFICE365_PASSWORD }}
           OFFICE365_MFA_CODE: ${{ secrets.OFFICE365_MFA_CODE }}
           PLAYWRIGHT_HEADLESS: 'true'
-        run: node check-office365.js
+        run: |
+          if [ -z "$OFFICE365_EMAIL" ] || [ -z "$OFFICE365_PASSWORD" ]; then
+            echo "Missing OFFICE365_EMAIL or OFFICE365_PASSWORD secret."
+            exit 0
+          fi
+          node check-office365.js
