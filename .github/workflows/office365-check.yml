@@ -1,0 +1,33 @@
+name: Office365 Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run check
+        env:
+          OFFICE365_EMAIL: ${{ secrets.OFFICE365_EMAIL }}
+          OFFICE365_PASSWORD: ${{ secrets.OFFICE365_PASSWORD }}
+          OFFICE365_MFA_CODE: ${{ secrets.OFFICE365_MFA_CODE }}
+          PLAYWRIGHT_HEADLESS: 'true'
+        run: node check-office365.js
