@@ -26,11 +26,21 @@ npx playwright install --with-deps chromium
 
 ### Single account
 
-Set environment variables:
+Copy the example environment file and fill in your values:
 
 ```bash
-export OFFICE365_EMAIL="your-email@example.com"
-export OFFICE365_PASSWORD="your-password"
+cp .env.example .env
+```
+
+Then edit `.env` with your credentials.
+
+Example:
+
+```env
+OFFICE365_EMAIL=your-email@example.com
+OFFICE365_PASSWORD=your-password
+OFFICE365_MFA_CODE=your-mfa-code-if-needed
+PLAYWRIGHT_HEADLESS=true
 ```
 
 Run:
