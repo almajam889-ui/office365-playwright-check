@@ -1,0 +1,13 @@
+{
+  "name": "office365-playwright-check",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "check": "node check-office365.js",
+    "login-file": "node login-from-file.js"
+  },
+  "dependencies": {
+    "playwright": "^1.54.0"
+  }
+}
